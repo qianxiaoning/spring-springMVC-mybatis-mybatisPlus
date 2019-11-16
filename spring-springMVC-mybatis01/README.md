@@ -24,19 +24,15 @@ v视图：视图渲染(jsp,html)
 ---
 ```
 流程：
-1.创建maven war项目
-2.生成web.xml文件：切换project explorer视图，deployment descriptor（部署描述符）右击，generate...生成部署描述符
-3.建/WEB-INF/pages/hello.jsp，WEB-INF/下不能直接访问，通过转发访问
-4.添加tomcat，右键项目-build path-add libraries...-server runtime
-5.直接复制pom依赖
-
-6.web.xml中配置前端控制器（指定配置文件，拦截除jsp请求），ctrl+shift+h，输入类名查类全路径
-7.新建springmvc-config.xml文件
-8.添加springmvc-config.xml配置（放行静态资源，注解驱动，包扫描路径，视图解析器添加前后缀）
-
-9.创建书写HelloController.java
-10.创建User pojo，测试对象传参 
-11.创建form.html，用它发起post请求测试post乱码问题
-12.在web.xml中加入过滤器解决乱码问题
-13.在HelloController.java中使用model，在hello.jsp展现
+maven project-war
+project视图生成web.xml
+项目右键build path-add libs，添加tomcat
+导入pom依赖
+创建log4j.properties log4j配置
+创建spring配置文件 applicationContext.xml
+创建并配置 springMVC配置文件 applicationContext.xml
+配置web.xml中
+创建springMVCTest.html
+建SpringMVCTest测试类
+自己推测整合mybatis
 ```
