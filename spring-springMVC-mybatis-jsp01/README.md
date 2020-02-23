@@ -1,5 +1,4 @@
 ### spring-springMVC-mybatis-jsp01
-#### springMVC，mvc模式的web轻量框架
 ```
 汉堡王门店、订单增删改查
 jsp-controller-dao-pojo-mapper.xml-jsp
