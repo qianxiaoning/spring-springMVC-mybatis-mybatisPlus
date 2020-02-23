@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 门店表的映射文件 namespace值为对应接口的全路径 -->
+<mapper namespace="com.qxn.dao.OrderMapper">
+	<!-- 1.查询所有门店信息，id值为对应接口中方法的名字 resultType指定将查询的结果封装到哪个pojo对象中 -->
+	<select id="findAll" resultType="com.qxn.pojo.Order">
+		select id,door_id doorId,
+		order_no orderNo,
+		order_type orderType,pnum,cashier,
+		order_time orderTime,
+		pay_time payTime,pay_type payType,
+		price from orders
+	</select>
+	<select id="findById" resultType="com.qxn.pojo.Order">
+		select id,door_id doorId,
+		order_no orderNo,
+		order_type orderType,pnum,cashier,
+		order_time orderTime,
+		pay_time payTime,pay_type payType,
+		price from orders where id=#{id}
+	</select>
+	<update id="orderInsert">
+		insert into orders values(null,
+		#{doorId},#{orderNo},#{orderType},
+		#{pnum},#{cashier},#{orderTime},
+		#{payTime},#{payType},#{price})
+	</update>		
+	<update id="deleteById">
+		delete from orders where id=#{id}
+	</update>		
+	<update id="updateById">
+		update orders set door_id=#{doorId},
+		order_no=#{orderNo},order_type=#{orderType},
+		pnum=#{pnum},cashier=#{cashier},
+		order_time=#{orderTime},
+		pay_time=#{payTime},pay_type=#{payType},
+		price=#{price} where id=#{id}
+	</update>
+</mapper>
