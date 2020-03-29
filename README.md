@@ -1,1 +1,1 @@
-### spring-springMVC-mybatis-jsp
+### spring-springMVC-mybatis
