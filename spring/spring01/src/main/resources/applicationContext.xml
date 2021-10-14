@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	<!-- 容器： -->
+	<!-- scope默认singleton单例 -->
+	<!-- scope prototype多例 -->
+	<!-- id：容器名，class：实体类包名 -->
+	<bean id="user" class="com.qxn.pojo.User">
+		<!-- set方法注值方式： -->
+		<!-- setName() -->
+		<property name="name" value="马云"></property>
+		<property name="age" value="20"></property>
+		<!-- ref指向下面的容器对象 -->
+		<property name="info" ref="userInfo"></property>
+		
+		<!-- 构造方法注值方式： -->
+		<!-- name名和构造参数名一致 -->
+		<!-- <constructor-arg name="name" value="马云"></constructor-arg>
+		<constructor-arg name="age" value="20"></constructor-arg>
+		<constructor-arg name="info" ref="userInfo"></constructor-arg> -->
+	</bean>
+	<bean id="userInfo" class="com.qxn.pojo.UserInfo"></bean>
+</beans>	

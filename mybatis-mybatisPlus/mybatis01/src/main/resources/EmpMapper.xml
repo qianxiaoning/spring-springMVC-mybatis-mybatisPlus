@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace为mapper.xml文件名 -->
+<mapper namespace="EmpMapper">
+	<!-- 查询emp表中所有的员工信息 -->
+	<select id="findAllEmp" resultType="com.qxn.pojo.Emp">
+		select * from emp;
+	</select>
+	<!-- 新增员工 王董 董事长 9999 -->
+	<update id="insertEmp">
+		insert into emp values(null,"王董","董事长",9999);
+	</update>
+	<!-- 修改员工信息，将王董的job改为区域董事长，salary改为99999 -->
+	<update id="updateEmp">
+		update emp set job="区域董事长",salary=99999 where name="王董";
+	</update>
+	<!-- 删除name为'王董'的记录 -->
+	<update id="deleteEmp">
+		delete from emp where name="王董";
+	</update>
+	<!-- 传值................ -->
+	<!-- 查询emp表中指定id的员工信息 -->
+	<select id="selectEmpById" resultType="com.qxn.pojo.Emp">
+		select * from emp where id=#{id};
+	</select>
+	<!-- 新增员工信息：小王总 兼职 2800 -->
+	<update id="insertEmp2">
+		insert into emp values(null,#{name},#{job},#{salary});
+	</update>
+	<!-- 修改员工信息：小王总 全职 2900 -->
+	<update id="updateEmp2">
+		update emp set job=#{job},salary=#{salary} where name=#{name};
+	</update>
+	<!-- 删除id为4的员工信息 -->
+	<update id="deleteEmp2">
+		delete from emp where id=#{id};
+	</update>
+	<!-- 不定项查询................ -->
+	<select id="findEmpByColumn" resultType="com.qxn.pojo.Emp">
+		select ${cols} from emp;
+	</select>
+	<!-- 模糊查询................ -->
+	<select id="findEmpByFuzzyName" resultType="com.qxn.pojo.Emp">
+		select * from emp where name like '%${name}%';
+	</select>
+	<!-- 动态sql................ -->
+	<!-- 根据薪资参数条件查询员工信息 -->
+	<select id="findEmpBySalParam" resultType="com.qxn.pojo.Emp">
+		select * from emp
+		<where>
+			<if test="minSal!=null">
+				salary>#{minSal}
+			</if>
+			<if test="maxSal!=null">
+				and salary<![CDATA[<]]>#{maxSal}
+			</if>
+		</where>
+	</select>
+	<!-- 根据参数传输与否，修改表中列 -->
+	<update id="updateEmpByCols">
+		update emp 
+		<set>
+			<if test="name!=null">
+				name=#{name},
+			</if>
+			<if test="job!=null">
+				job=#{job},
+			</if>
+			<if test="salary!=null">
+				salary=#{salary}
+			</if>
+		</set>
+		where id=#{id};
+	</update>
+	<!-- 根据员工的id批量删除员工信息 -->
+	<update id="deleteEmpByIds">
+		delete from emp where id in 
+		<foreach collection="array" open="("
+		close=")" separator="," item="id">
+			#{id}
+		</foreach>
+	</update>
+	<!-- 根据员工的id批量查询员工信息 -->
+	<select id="findEmpByIds" resultType="com.qxn.pojo.Emp">
+		select * from emp where id in 
+		<foreach collection="array" open="("
+		close=")" separator="," item="id">
+			#{id}
+		</foreach>
+	</select>
+</mapper>

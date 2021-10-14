@@ -1,1 +1,2 @@
-### spring-springMVC-mybatis
+### spring-springMVC-mybatis-mybatisPlus
+#### ssm框架相关技术

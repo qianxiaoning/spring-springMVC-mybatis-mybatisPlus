@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- 配置Bean对象的扫描 -->
+	<context:component-scan base-package="com.qxn" />
+	<!-- 配置默认静态资源的处理 (images/css/js/html) -->
+	<mvc:default-servlet-handler />
+	<!-- 注册默认的一些mvc bean对象 -->
+	<mvc:annotation-driven />
+	<!-- 配置视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- set注入 -->
+		<property name="Prefix" value="/WEB-INF/pages/" />
+		<property name="Suffix" value=".html" />
+	</bean>
+	<!-- ..... 拦截器 -->
+</beans>        

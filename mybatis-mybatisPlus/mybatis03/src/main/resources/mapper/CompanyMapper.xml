@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qxn.pj.company.dao.CompanyDao">
+	<!-- 开启二级缓存，SqlSession间 -->
+	<!-- eviction指定算法，type自定义cache,
+	flushInterval刷新频率 -->
+	<cache eviction="weak" readOnly="false" 
+	flushInterval="60000" size="1024"/>
+	<delete id="deleteObjects">
+		delete from game_company 
+		<where> 
+			<!-- foreach迭代一个数组或集合 -->
+			<foreach collection="array" item="id">
+				or id=#{id}
+			</foreach>
+		</where>
+	</delete>
+	<!-- <delete id="deleteObjects">
+		delete from game_company where id in 
+		<foreach collection="array" open="(" 
+		close=")" separator="," item="id">
+			#{id}
+		</foreach>
+	</delete> -->
+	<select id="findPageObjects" resultType="com.qxn.pj.company.pojo.Company">
+		select * from game_company limit #{startIndex},#{pageSize}		
+	</select>
+	<!-- select定义结果映射类型，例如通过resultType指定
+	resultType值为查询一行记录要映射的结果类型
+	 -->
+	<select id="selectById" resultType="com.qxn.pj.company.pojo.Company">
+		select id,name,remark,createdTime 
+		from game_company where id=#{id}
+	</select>
+	<!-- 系统底层会将每个元素封装为
+	MappedStatement对象（映射语句对象）
+	 -->
+	<delete id="deleteById">
+		delete from game_company where id=#{id}
+	</delete>
+	<insert id="insertObject">
+		insert into game_company 
+		values(#{id},#{name},#{remark},now())
+	</insert>
+	<update id="updateObject">
+		update game_company set 
+		name=#{name},
+		remark=#{remark} 
+		where id=#{id}
+	</update>
+</mapper>  

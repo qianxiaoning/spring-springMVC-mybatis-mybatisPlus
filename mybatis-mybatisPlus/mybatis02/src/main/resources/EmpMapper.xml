@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace为mapper接口全路径 -->
+<mapper namespace="com.qxn.dao.EmpMapper">
+	<!-- 查询emp表中所有的员工信息 -->
+	<select id="findAllEmp" resultType="com.qxn.pojo.Emp">
+		select * from emp;
+	</select>	
+	<!-- 根据id查询员工信息-->
+	<select id="findEmpById" resultType="com.qxn.pojo.Emp">
+		select * from emp where id=#{id};
+	</select>	
+	<!-- 新增员工信息-->
+	<update id="insertEmp">
+		insert into emp values(null,#{name},#{job},#{salary});
+	</update>
+	<!-- 修改指定id的员工信息 10 小王总 兼职 2900-->
+	<update id="updateEmp">
+		update emp set name=#{name},job=#{job},salary=#{salary} where id=#{id}
+	</update>
+	<!-- 根据id删除员工信息-->
+	<update id="deleteEmpById">
+		delete from emp where id=#{id}
+	</update>
+</mapper>
